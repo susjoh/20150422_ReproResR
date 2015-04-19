@@ -9,7 +9,8 @@ library(ggplot2)
 hds <- read.table("data/haggis_density.txt", header = T)
 head(hds)
 
-hds <- rbind(hds, data.frame(Year = 2001, PopSize = 868))
+hds <- rbind(hds, data.frame(Year = c(2001, 2002),
+                             PopSize = c(868, 890)))
 
 
 # Conduct a linear regression of Population Size by Year
