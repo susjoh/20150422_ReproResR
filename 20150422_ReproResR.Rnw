@@ -2,9 +2,10 @@
 \setbeamertemplate{section in toc}[sections numbered]
 \setbeamercovered{dynamic}
 \usepackage[labelformat=empty]{caption}
-
-
-
+\usepackage{attrib}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{subfigure}
 \title{Introduction to Reproducible Research\\ in R and R Studio.}
 
 \author{Susan Johnston}
@@ -12,7 +13,7 @@
 
 \AtBeginSection[]
 {
-  \begin{frame}<beamer>{Reproducible Research in R Studio.}
+  \begin{frame}<beamer>{Reproducible Research in \includegraphics[height=1.5em]{talk_images/RStudio-Ball} Studio.}
     \tableofcontents[currentsection]
   \end{frame}
 }
@@ -32,39 +33,27 @@ options(width=60)
 
 \section*{Introduction}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{What is Reproducible Research?}
 
-\begin{figure}[tbp] % top of page
-  \centering
-    \includegraphics[width=1\textwidth]{talk_images/wikidefinition}
-\end{figure} 
+\begin{quote}
 
+\textbf{Reproducibility} is the ability of an entire experiment or study to be reproduced, either by the researcher or by someone else working independently, [and] is one of the main principles of the scientific method.
+\end{quote}
 
-%   \begin{itemize}
-%     \item Research should be reproducible by you and others.
-%     \item For every result, there should be a record of how it was produced.
-%     \item It should be possible to revert to any previous step in the analysis.
-%   \end{itemize}
+\hfill Wikipedia
+
 \end{frame}
 
-% \begin{frame}{Scenarios which benefit from reproducible research.}
-%   \begin{itemize}
-%     \item  New raw data becomes available.
-%     \item  Returning to a project after a period of time.
-%     \item  Project is collaborative, or handed over to someone new.
-%     \item  A mistake is found in the analysis that affects downstream results.
-%     \item  You seriously screw things up.
-%     \item  Dealing with pre- and post-publication peer review.
-%   \end{itemize}
-% \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Many of us are used to clicking, copying and pasting...}
 \begin{figure}[tbp] % top of page
   \centering
     \includegraphics[width=1\textwidth]{talk_images/badclicking}
 \end{figure}
-\pause
+%\pause
 \begin{itemize}
 \item Can you repeat all of this again\ldots
 \begin{itemize}
@@ -72,60 +61,226 @@ options(width=60)
 \item When a journal editor wants you to change a model parameter?
 \item When you find an error, but not sure where you went wrong?
 \end{itemize}
-\pause
+%\pause
 \item \ldots and would you get the same results every time?
 \end{itemize}
-
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Worst Case Scenario}
+%\hline
 \begin{figure}[tbp] % top of page
   \centering
-    \includegraphics[width=1\textwidth]{talk_images/WorstCaseScenario}
+    \includegraphics[width=0.8\textwidth]{talk_images/WorstCaseScenario}
 \end{figure}
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}{Three rules for reproducibility}
 
-\begin{figure}[t] % top of page
-  \centering
-      \includegraphics[width=0.8\textwidth]{talk_images/PLoSCompResearch}
-      \caption{\tiny http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285}
-\end{figure}
-
-\pause
-Can be summarised as follows:\pause
+%\pause
 \begin{enumerate}
-\item Avoid manual data manipulation steps. \pause
-\item Connect textual statements to underlying results. \pause
-\item Version control all custom scripts and documents. \pause
+\item Avoid manual data manipulation steps.
+\begin{itemize}
+\item Automate analyses using scripts
+\item "This is R. There is no 'if'. Only 'how'."
+\item[] {}
+\item[] {}
+\end{itemize}
+%\pause
+\item Connect textual statements to underlying results.
+\begin{itemize}
+\item Create documents where results and figures can update automatically.
+\item[] {}
+\item[] {}
+\end{itemize}
+%\pause
+\item Version control all custom scripts and documents.
+\begin{itemize}
+\item It should be possible to revert to a previous version of an analysis.
+\end{itemize}
 \end{enumerate}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Reproducible Research in R Studio.}
-  \tableofcontents
+\begin{frame}{The \includegraphics[height=1.5em]{talk_images/RStudio-Ball} Studio Environment: http://www.rstudio.com }
+\begin{figure}[t] % top of page
+  \centering
+      \includegraphics[width=1\textwidth]{talk_images/WelcomeToRstudio}
+\end{figure}
 \end{frame}
+
+% \begin{frame}{The R Studio Environment: http://www.rstudio.com}
+% \begin{figure}[t] % top of page
+%   \centering
+%       \includegraphics[width=1\textwidth]{talk_images/Picture1}
+% \end{figure}
+% \end{frame}
+% 
+% \begin{frame}{The R Studio Environment: http://www.rstudio.com}
+% \begin{figure}[t] % top of page
+%   \centering
+%       \includegraphics[width=1\textwidth]{talk_images/Picture2}
+% \end{figure}
+% \end{frame}
+% 
+% \begin{frame}{The R Studio Environment: http://www.rstudio.com}
+% \begin{figure}[t] % top of page
+%   \centering
+%       \includegraphics[width=1\textwidth]{talk_images/Picture3}
+% \end{figure}
+% \end{frame}
+% 
+% \begin{frame}{The R Studio Environment: http://www.rstudio.com}
+% \begin{figure}[t] % top of page
+%   \centering
+%       \includegraphics[width=1\textwidth]{talk_images/Picture4}
+% \end{figure}
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Reproducible Research in \includegraphics[height=1.5em]{talk_images/RStudio-Ball} Studio.}
+  \tableofcontents%[pausesections]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Creating a Portable Project (.Rproj)}
 
-\begin{frame}[fragile]{Second Slide Title}
-<<>>=
-data(cars)
-summary(cars)
-@
+
+
+\begin{frame}{Creating a Portable Project (.Rproj)}
+\begin{tikzpicture}
+  \node (talk_images/filemenu) {\includegraphics[height=3cm]{talk_images/filemenu}};
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Creating a Portable Project (.Rproj)}
+\begin{tikzpicture}
+  \node (talk_images/filemenu) {\includegraphics[height=3cm]{talk_images/filemenu}};
+  \node (talk_images/makenewproject) at (talk_images/filemenu.south east) {\includegraphics[height=4cm]{talk_images/makenewproject}};
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Creating a Portable Project (.Rproj)}
+\begin{tikzpicture}
+  \node (talk_images/filemenu) {\includegraphics[height=3cm]{talk_images/filemenu}};
+  \node (talk_images/makenewproject) at (talk_images/filemenu.south east) {\includegraphics[height=4cm]{talk_images/makenewproject}};
+  \node (talk_images/makenewproject2) at (talk_images/makenewproject.south east) {\includegraphics[height=4cm]{talk_images/makenewproject2}};
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Creating a Portable Project (.Rproj)}
+\begin{figure}[t] % top of page
+  \centering
+      \includegraphics[width=1\textwidth]{talk_images/haggisproject3}
+\end{figure}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}{Why use RStudio Projects?}
+{\scriptsize https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects}
+
+% \begin{figure}[t] % top of page
+%   \centering
+%       \includegraphics[width=0.7\textwidth]{talk_images/hadleyandsetwd}
+% \end{figure}
+
+\begin{itemize}
+\item Establishes a directory with associated \protect\texttt{.Rproj} file.
+\item[] {}
+\item Sets the working directory automatically (avoids \protect\texttt{setwd()}).
+\item[] \includegraphics[width=0.85\textwidth]{talk_images/hadleyandsetwd}
+\item[] {}
+\item Can save and source \protect\texttt{.Rprofile}, \protect\texttt{.Rhist} and \protect\texttt{.Rdata} files.
+\item[] {}
+\item Mandatory for Version Control within R Studio.
+\end{itemize}
 
 
 \end{frame}
 
-\section{Dynamic report writing with \protect\texttt{knitr}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% http://nicercode.github.io/guides/reports/
 
-\begin{frame}{Second Slide Title}
-x
+
+\section{Dynamic report writing with R Markdown and \protect\texttt{knitr}}
+
+
+
+\begin{frame}{\includegraphics[height=3em]{talk_images/knitr} \hfill Write reports directly in R}
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{talk_images/rmarkdownfirst2}
+  \captionof{figure}{}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{talk_images/rmarkdownfirst}
+  \captionof{figure}{}
+\end{minipage}
+\end{figure}
+
+
+
+% \begin{figure}
+% \centering
+% \begin{minipage}{.45\textwidth}
+%   \centering
+%   \includegraphics[width=1\linewidth]{talk_images/rmarkdownfirst2}
+% \end{minipage}
+% 
+% \begin{minipage}{.45\textwidth}
+%   \centering
+%   \includegraphics[width=1\linewidth]{talk_images/rmarkdownfirst}
+% 
+% \end{minipage}
+% \end{figure}
+
 \end{frame}
+
+
+
+
+
+
+\begin{frame}{Next Steps}
+\begin{itemize}
+\item \protect\texttt{spin()} and Compile Notebook
+\item Converts comments to RMarkdown output
+\item Output to .pdf \& .doc
+\item Can integrate with \LaTeX
+\item Presentations (ioslides, Slidy, Beamer)
+\item Interactive Documents (Shiny)
+\end{itemize}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \section{Version control using \protect\texttt{git}}
 
